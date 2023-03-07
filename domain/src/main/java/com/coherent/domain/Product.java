@@ -1,14 +1,14 @@
 package com.coherent.domain;
 
 public class Product {
-    private String name;
-    private double rate;
-    private double price;
+    private final String name;
+    private final double rate;
+    private final double price;
 
-    public Product(String name, double rate, double price) {
-        this.name = name;
-        this.rate = rate;
-        this.price = price;
+    public Product(Builder builder) {
+        this.name = builder.name;
+        this.rate = builder.rate;
+        this.price = builder.price;
     }
 
     public String getName() {
@@ -21,5 +21,30 @@ public class Product {
 
     public double getPrice() {
         return price;
+    }
+
+    public static class Builder {
+        private String name;
+        private double rate;
+        private double price;
+
+        public Builder name(String name) {
+            this.name = name;
+            return this;
+        }
+
+        public Builder rate(double rate) {
+            this.rate = rate;
+            return this;
+        }
+
+        public Builder price(double price) {
+            this.price = price;
+            return this;
+        }
+
+        public Product build() {
+            return new Product(this);
+        }
     }
 }
